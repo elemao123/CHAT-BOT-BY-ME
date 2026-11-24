@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: smarthome-agente
+    runtime: python
+    plan: starter            # el disco persistente requiere plan de pago
+    buildCommand: "echo sin dependencias"
+    startCommand: python3 server.py
+    healthCheckPath: /
+    disk:
+      name: datos
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.3"
+      - key: AGENT_DB
+        value: /data/agente.db
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: WA_VERIFY_TOKEN
+        sync: false
+      - key: WA_ACCESS_TOKEN
+        sync: false
+      - key: WA_PHONE_NUMBER_ID
+        sync: false
+      - key: ADVISOR_PHONE
+        sync: false
+      - key: IGNORE_PHONES
+        sync: false
